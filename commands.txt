@@ -1,0 +1,13 @@
+Execution commands:
+
+cd jni/
+android-ndk-r25c/ndk-build
+adb push ../libs/arm64-v8a/* /data/local/tmp
+adb push ../assets/bilateralKernel.cl /data/local/tmp
+adb shell
+
+shell:
+	cd data/local/tmp
+	export LD_LIBRARY_PATH=/data/local/tmp
+	chmod -R 777 prism
+	./prism

@@ -26,9 +26,19 @@ int main() {
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto int_us = std::chrono::duration_cast<std::chrono::microseconds>(stop - start); 
 	std::chrono::duration<long, std::micro> int_usec = int_us;
-	printf("Execution Time: %ld microseconds\n", int_usec.count());
+	printf("Execution Time-Ref: %ld microseconds\n", int_usec.count());
+
+
+	auto start_ = std::chrono::high_resolution_clock::now();
 
 	openCLNR(in_p, out_p, &shape[0]);
+
+	auto stop_ = std::chrono::high_resolution_clock::now();
+	auto int_us_ = std::chrono::duration_cast<std::chrono::microseconds>(stop_ - start_);
+	std::chrono::duration<long, std::micro> int_usec_ = int_us_;
+	printf("Execution Time-OpenCL: %ld microseconds\n", int_usec_.count());
+
+	printf("Performance : %f\n",((float)int_usec.count() / (float)int_usec_.count()));
 
 	return 0;
 
